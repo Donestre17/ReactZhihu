@@ -1,13 +1,44 @@
 .swiper-container {
   width: 100%;
-  height: 4rem;
+  height: 5.5rem;
   margin-bottom: .4rem;
   box-sizing: border-box;
-  border: 1px solid #FF4081;
+  position: relative;
 }
 .swiper-container .swiper-slide {
-  height: 4rem;
+  height: 5.5rem;
   width: 100%;
+  overflow: hidden;
+}
+.swiper-container .swiper-slide img {
+  width: 100%;
+}
+.swiper-container .swiper-slide h3 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 1.4rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-size: .5rem;
+  line-height: .7rem;
+  padding: 0 .4rem;
+  box-sizing: border-box;
+  color: #fff;
+  font-weight: normal;
+  z-index: 101;
+}
+.swiper-container .swiper-slide a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 100;
 }
 .swiper-container .swiper-pagination span {
   background: #FF4081;

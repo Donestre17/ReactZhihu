@@ -1,9 +1,9 @@
 header {
-  width: 9.5rem;
+  width: 100%;
   height: 1.5rem;
-  margin: .25rem auto 0 auto;
   background: #00BCD4;
   color: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
 }
 header button {
   width: 1.5rem;
@@ -14,8 +14,9 @@ header button {
   font-size: .6rem;
   outline: none;
 }
-header .list {
+header .back {
   float: left;
+  font-size: .8rem;
 }
 header .hd-info {
   float: left;

@@ -20,10 +20,12 @@
   "homepage": "https://github.com/Donestre17/ReactZhihu#readme",
   "dependencies": {
     "antd": "^2.10.0",
+    "axios": "^0.16.1",
     "babel": "^6.23.0",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
     "css-loader": "^0.28.1",
+    "express": "^4.15.2",
     "file-loader": "^0.11.1",
     "font-awesome": "^4.7.0",
     "hjs-webpack": "^9.1.0",
@@ -41,6 +43,7 @@
     "react-tap-event-plugin": "^2.0.1",
     "reactjs-iscroll": "^0.3.2",
     "style-loader": "^0.17.0",
+    "superagent": "^3.5.2",
     "swiper": "^3.4.2",
     "url-loader": "^0.5.8"
   },

@@ -4,6 +4,9 @@ html body .root .wrap {
 body {
     overflow: hidden;
 }
+.wrap {
+    overflow: hidden;
+}
 ul,li {
     margin: 0;
     padding: 0;

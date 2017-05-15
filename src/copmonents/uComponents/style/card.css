@@ -21,6 +21,10 @@
   font-weight: normal;
   letter-spacing: .04rem;
 }
+.news-card .title a {
+  color: #000;
+  text-decoration: none;
+}
 .news-card .card-avatar {
   float: right;
   width: 2rem;

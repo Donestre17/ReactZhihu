@@ -4,7 +4,7 @@ export default class Tabs extends Component {
     render(){
         return (
             <nav className="tabs">
-                <div className="tab"> 全部 </div>
+                <div className="tab active"> 全部 </div>
                 <div className="tab"> 全部 </div>
                 <div className="tab"> 全部 </div>
                 <div className="tab"> 全部 </div>

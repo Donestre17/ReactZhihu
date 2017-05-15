@@ -1,0 +1,10 @@
+button.list {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: .6rem;
+  outline: none;
+  float: left;
+}
