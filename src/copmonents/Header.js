@@ -12,18 +12,23 @@ export default class Header extends Component {
         window.history.back();
     }
     render(){
-        console.log(this.props)
+        console.log(this.props.location.pathname)
         let {pathname} = this.props.location
         let back = this.back
         return (
             <header>
                 {
-                    pathname==='/'
+                    pathname==='/'||pathname==='/themes'
                     ?<ListControl/>
                     :<button className="back" onTouchTap={back}><i className="fa fa-angle-left"></i></button>
                 }
                 
-                <h1 className="hd-info">知乎日报</h1>
+                <h1 className="hd-info">
+                    
+                    {
+                       pathname==='/themes'?'知乎专题':'知乎日报' 
+                    }
+                </h1>
                 
             </header>
         )

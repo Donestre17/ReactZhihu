@@ -16,15 +16,31 @@ export default class Content extends Component {
             topStories:[]
         }
     }
+    componentWillMount() {
+        let content = JSON.parse(sessionStorage.getItem('content'));
+        let topStories = JSON.parse(sessionStorage.getItem('topStories'));
+        this.setState({
+            content,
+            topStories
+        })
+    }
     componentDidMount() {
         // document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-        axios.get('/api/news')
-        .then((res)=> {
-            this.setState({
-                topStories:res.data.content.top_stories,
-                content:res.data.content.stories
+        let content = JSON.parse(sessionStorage.getItem('content'));
+        let topStories = JSON.parse(sessionStorage.getItem('topStories'))
+        if(!content||!topStories){
+            axios.get('/api/news')
+            .then((res)=> {
+                let content = res.data.content.stories;
+                let topStories = res.data.content.top_stories;
+                this.setState({
+                    topStories:res.data.content.top_stories,
+                    content:content
+                })
+                sessionStorage.setItem('content',JSON.stringify(content))
+                sessionStorage.setItem('topStories',JSON.stringify(topStories))
             })
-        })
+        }
     };
     update(){
         console.log('update!!')
@@ -41,7 +57,8 @@ export default class Content extends Component {
         
     }
     render(){
-        let {topStories,content} = this.state
+        let topStories = this.state.topStories||[];
+        let content = this.state.content||[];
         return (
             <IScroll 
             iScroll={iScroll} 

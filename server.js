@@ -14,7 +14,6 @@ app.get('/test',function(req,res) {
 app.get('/news',function(req,res) {
     superagent.get('http://news-at.zhihu.com/api/3/stories/latest')
     .end((err,data)=>{
-        console.log(data.body)
         res.json({
             content:data.body
         })
@@ -25,13 +24,20 @@ app.get('/page',function(req,res) {
     let id = req.query.id
     superagent.get('http://news-at.zhihu.com/api/4/news/'+id)
     .end((err,data)=>{
-        console.log(data.body)
         res.json({
             content:data.body
         })
     })
 })
-
+//获取专题
+app.get('/themes',function(req,res) {
+    superagent.get('http://news-at.zhihu.com/api/4/themes')
+    .end((err,data)=>{
+        res.json({
+            content:data.body
+        })
+    })
+})
 app.listen(3001,function () {
     console.log('server run at 3001')
 })

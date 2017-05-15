@@ -13,7 +13,6 @@ export default class Card extends Component {
     }
     render(){
         let {info} = this.props
-        console.log(info.images)
         return (
             <li className="news-card" onTouchTap={this.touch.bind(this)}>
                 <h3 className="title">

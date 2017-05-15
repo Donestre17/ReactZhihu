@@ -15,7 +15,10 @@
   font-size: .3rem;
   line-height: .5rem;
   text-align: center;
+}
+.tabs .tab a {
   color: #fff;
+  text-decoration: none;
 }
 .tabs .tab.active {
   border-radius: 10px;

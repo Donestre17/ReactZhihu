@@ -51,6 +51,7 @@ class App extends Component {
                         {/*<Header listShow={this.listShow}/>*/}
                         <Route path="/" component={Header}/>
                         <Route exact path="/" component={Tabs}/>
+                        <Route exact path="/themes" component={Tabs}/>
                         <Route exact path="/" component={Content}/>
                         <Route path="/themes" component={Themes}/>
                         <Route path="/page/:id" component={Page}/>
