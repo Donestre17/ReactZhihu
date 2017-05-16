@@ -15,6 +15,7 @@ import Tabs from './copmonents/Tabs'
 import Content from './copmonents/Content'
 import Themes from './copmonents/Themes'
 import Page from './copmonents/Page'
+import ThemeDetail from './copmonents/ThemeDetail'
 //样式重置
 require('normalize.css')
 require('font-awesome/css/font-awesome.css')
@@ -33,11 +34,11 @@ class App extends Component {
         mobile();
 
         //解决盗链问题，为header添加<meta name="referrer" content="never">
-        var header = document.getElementsByTagName('header')[0]
+        var head = document.getElementsByTagName('head')[0]
         var meta = document.createElement('meta');
         meta.setAttribute('name','referrer');
         meta.setAttribute('content','never');
-        header.appendChild(meta)
+        head.appendChild(meta)
     }
     listShow(){
         this.setState({
@@ -48,12 +49,18 @@ class App extends Component {
         return (
                 <Router>
                     <div className='wrap'>
-                        {/*<Header listShow={this.listShow}/>*/}
+                        {/*头部，匹配所有*/}
                         <Route path="/" component={Header}/>
+                        {/*选项卡*，匹配主页和专题页*/}
                         <Route exact path="/" component={Tabs}/>
                         <Route exact path="/themes" component={Tabs}/>
+                        {/*主内容区域，匹配主页*/}
                         <Route exact path="/" component={Content}/>
+                        {/*专题页，匹配专题页*/}
                         <Route path="/themes" component={Themes}/>
+                        {/*专题详情页，匹配专题详情*/}
+                        <Route path="/theme/:id" component={ ThemeDetail }/>
+                        {/*文章页，匹配文章页*/}
                         <Route path="/page/:id" component={Page}/>
                     </div>
                 </Router>

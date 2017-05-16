@@ -15,14 +15,20 @@ export default class Card extends Component {
         let {info} = this.props
         return (
             <li className="news-card" onTouchTap={this.touch.bind(this)}>
-                <h3 className="title">
+                <h3 className={info.images[0]?'title':'title long'}>
                     <Link to={"/page/"+info.id}>
                         {info.title}
                     </Link>
-                    </h3>
-                <a className="card-avatar" href="javascript:;">
-                    <img src={info.images[0]||''}/>
-                </a>
+                </h3>
+                {
+                    info.images[0]
+                    ?<a className="card-avatar" href="javascript:;">
+                        <img src={info.images[0]||''}/>
+                    </a>
+                    :''
+                }
+
+                
             </li>
         )
     }

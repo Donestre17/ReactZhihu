@@ -14,17 +14,21 @@ export default class Slider extends Component {
         this.loaded = this.loaded.bind(this)
     }
     componentDidMount() {
+        
     }
     componentDidUpdate(prevProps, prevState) {
-        //数据请求到后进行轮播初始化
         var slider = this.refs.slider; 
-        var mySwiper = new Swiper (slider, {
+        var mySwiper;
+        mySwiper = new Swiper (slider, {
             autoplay: 2000,
             loop: true,
             pagination : '.swiper-pagination',
             paginationType : 'bullets',
             paginationClickable :true,
         }) 
+    }
+    componentWillUnmount() {
+        console.log('destory')
     }
     loaded(){
         this.setState({

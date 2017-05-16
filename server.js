@@ -38,6 +38,16 @@ app.get('/themes',function(req,res) {
         })
     })
 })
+//获取专题详情
+app.get('/theme',function(req,res) {
+    let id = req.query.id
+    superagent.get('http://news-at.zhihu.com/api/4/theme/' + id)
+    .end((err,data)=>{
+        res.json({
+            content:data.body
+        })
+    })
+})
 app.listen(3001,function () {
     console.log('server run at 3001')
 })

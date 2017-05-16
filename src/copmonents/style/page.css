@@ -38,6 +38,14 @@
   font-size: .8rem;
   margin-bottom: .5rem;
 }
+.page .main .headline {
+  font-size: .3rem;
+  color: #333;
+}
+.page .main .headline h1 {
+  margin: .3rem 0;
+  font-weight: normal;
+}
 .page .main .question-title {
   font-size: .45rem;
   line-height: .7rem;
@@ -47,6 +55,9 @@
   font-style: italic;
   padding: 0 .3rem;
   box-sizing: border-box;
+}
+.page .main .meta {
+  margin: .3rem 0;
 }
 .page .main .meta .avatar {
   width: .55rem;
@@ -58,6 +69,9 @@
 }
 .page .main .meta .bio {
   font-size: .35rem;
+}
+.page .main .meta a {
+  color: #00bcd4;
 }
 .page .main .content {
   font-size: .45rem;
@@ -75,6 +89,14 @@
 .page .main .content img {
   display: inline-block;
 }
+.page .main .content h1 {
+  font-weight: normal;
+  font-size: .6rem;
+}
+.page .main .content h2 {
+  font-weight: normal;
+  font-size: .55rem;
+}
 .page .main .content a {
   font-size: .4rem;
   font-style: italic;
@@ -83,6 +105,7 @@
   line-height: .7rem;
   overflow: hidden;
   white-space: nowrap;
+  color: #00bcd4;
 }
 .page .main .view-more {
   font-size: .4rem;

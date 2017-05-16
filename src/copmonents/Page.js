@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Loading from './uComponents/Loading'
 import axios from 'axios'
 
 require('./style/page.css')
@@ -11,12 +11,11 @@ export default class Page extends Component {
             image:'',
             body:'',
             loading:true,
-            height:0
+            height:0,
         }
     }
     componentDidMount() {
         setTimeout(()=> {
-            console.log(document.documentElement.clientHeight , this.refs.i.offsetTop)
             this.setState({
                 height:document.documentElement.clientHeight - this.refs.i.offsetTop
                 
@@ -26,10 +25,10 @@ export default class Page extends Component {
         let url = '/api/page?id=' + this.props.match.params.id
         axios.get(url)
         .then((res)=>{
-            let { title ,image ,body} = res.data.content;
+            let { title ,image ,body ,images ,theme} = res.data.content;
             this.setState({
                 title,
-                image,
+                image:image||images||theme.thumbnail,
                 body,
                 loading:false
             })
@@ -39,9 +38,12 @@ export default class Page extends Component {
         let { title ,image ,body ,loading} = this.state;
             return (
                 <div ref="i" className="page" style={{height:this.state.height&&(this.state.height + 'px')}}>
+                    {
+                        loading&&<Loading/>
+                    }
                     <div ref="wrap" className="scroll-wrap">
                         <div className="title-pic">
-                            <img src={image}/>
+                            <img src={image instanceof Array?image[0]:image}/>
                             <div className="mask"></div>
                         </div>
                         <div className="page-con">
