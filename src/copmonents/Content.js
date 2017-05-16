@@ -17,6 +17,7 @@ export default class Content extends Component {
             topStories:[],
             load:true,
             topGap:0,
+            loadDate:Number(sessionStorage.getItem('flag'))||(new Date().getDate())
         }
         this.getNews = this.getNews.bind(this)
     }
@@ -26,7 +27,8 @@ export default class Content extends Component {
         this.setState({
             content,
             topStories,
-            load:false
+            load:false,
+            onoff:true
         })
     }
     componentDidMount() {
@@ -46,9 +48,25 @@ export default class Content extends Component {
         .then((res)=> {
             let content = res.data.content.stories;
             let topStories = res.data.content.top_stories;
+            //请求新内容与旧有内容判断去重
+            let oldContent = this.state.content;
+            if(oldContent){
+                for(var i = 0;i<content.length;i++){
+                    for(var j = 0;j<oldContent.length;j++){
+                        if(content[i].id == oldContent[j].id ){
+                            content.splice(i,1)
+                            i--
+                            break;
+                        }
+                    }
+                }
+            }
+
+
+
             this.setState({
                 topStories:res.data.content.top_stories,
-                content:content,
+                content:oldContent?content.concat(oldContent):content,
                 load:false
             })
             sessionStorage.setItem('content',JSON.stringify(content))
@@ -63,8 +81,36 @@ export default class Content extends Component {
             this.getNews()
             console.log('refresh')
         }
-        if(e.maxScrollY >= e.y){
-            console.log('btn!!')
+        if( e.y <= e.maxScrollY-120 ){
+            //加载之前内容
+            if(this.state.onoff){
+                this.setState({
+                    onoff:false
+                })
+                var day = this.state.loadDate
+                var date = new Date(new Date().setDate(day - 1))
+                var flag = new String(date.getFullYear())
+                + (new String(date.getMonth()+1).length==2?(new String(date.getMonth()+1)):('0' + new String(date.getMonth()+1))) 
+                + (new String(date.getDate()).length==2?(new String(date.getDate())):('0' + new String(date.getDate())))
+                console.log(flag)
+                axios.get('/api/before?d='+flag)
+                .then((res)=>{
+                    console.log(res.data.content)
+                    this.setState({
+                        content:this.state.content.concat(res.data.content),
+                        loadDate:this.state.loadDate - 1
+                    })
+                    let content = this.state.content
+                    let day = this.state.loadDate
+                    sessionStorage.setItem('flag',String(day))
+                    sessionStorage.setItem('content',JSON.stringify(content))
+                    setTimeout(()=> {
+                        this.setState({
+                            onoff:true
+                        })
+                    }, 5000);
+                })
+            }
         }
     };
     loadMore(){

@@ -48,6 +48,16 @@ app.get('/theme',function(req,res) {
         })
     })
 })
+//获取过往新闻
+app.get('/before',function(req,res) {
+    let d = req.query.d;
+    superagent.get('http://news-at.zhihu.com/api/4/news/before/'+d)
+    .end((err,data)=>{
+        res.json({
+            content:data.body.stories
+        })
+    })
+})
 app.listen(3001,function () {
     console.log('server run at 3001')
 })
