@@ -20,7 +20,8 @@
             margin: 0;
             padding: 0;
             float: left;
-            background: #fff;
+            background: rgba(255, 255, 255, .9);
+            overflow: hidden;
             &.show{
                 animation: listShow .3s forwards;
             }
@@ -29,6 +30,54 @@
             }
             li {
                 list-style: none;
+                color: dimgrey;
+                text-align: left;
+                &.list-hd {
+                    background-color: #00bcd4;
+                    height: 3rem;
+                    position: relative;
+                    box-shadow: 0px 2px 5px rgba(0, 0, 0, .5);
+                    a {
+                        position: absolute;
+                        bottom: .3rem;
+                        right: .3rem;
+                        color: #f1f1f1;
+                        text-decoration: none;
+                        i,span {
+                            display: inline-block;
+                            margin-left: .3rem;
+                        }
+                    }
+                }
+                h4 {
+                    width: 90%;
+                    margin: .2rem auto .5rem auto;
+                    height: .8rem;
+                    font-size: .45rem;
+                    font-weight: normal;
+                    box-sizing: border-box;
+                    padding-left: .15rem;
+                    border-bottom: 2px solid #ff4081;
+                }
+                ul {
+                    width: 90%;
+                    margin: 0 auto;
+                    li {
+                        height: .55rem;
+                        font-size: .35rem;
+                        line-height: .55rem;
+                        margin: .3rem 0;
+                        color: #000;
+                        padding-left: .3rem;
+                        box-sizing: border-box;
+                        border-left: 4px solid #ff4081;
+                        box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
+                        a {
+                            color: #000;
+                            text-decoration: none;
+                        }
+                    }
+                }
             }
         }
     }

@@ -61,14 +61,12 @@ export default class Content extends Component {
                     }
                 }
             }
-
-
-
             this.setState({
                 topStories:res.data.content.top_stories,
                 content:oldContent?content.concat(oldContent):content,
                 load:false
             })
+            content = this.state.content
             sessionStorage.setItem('content',JSON.stringify(content))
             sessionStorage.setItem('topStories',JSON.stringify(topStories))
         })

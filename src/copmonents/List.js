@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-require('./style/list.css')
+import { Link } from 'react-router-dom'
 
+
+require('./style/list.css')
+import Storage from '../storage'
 export default class List extends Component {
     constructor(props){
         super(props)
-
         this.state = {
             height:null,
             width:null,
+            likes:Storage.get('themes')||[]
         }
 
         this.listCancelBubble = this.listCancelBubble.bind(this)
@@ -36,6 +39,7 @@ export default class List extends Component {
         })
     }
     render(){
+        let { likes } = this.state;
         return (
                 <div 
                 style={{height:this.state.height+'px',width:this.state.width+'px',display:this.props.first?'block':'false'}}
@@ -45,10 +49,25 @@ export default class List extends Component {
                     className={this.props.list?'list show':'list hide'}
                     onTouchTap={this.listCancelBubble}
                     >
-                        <li className="list-item list-hd">
-                            <a className="user" href="javascript:;">
-                                <img className="avater"/>
-                            </a>
+                        <li className="list-hd">
+                            <Link to="/" onTouchTap={this.listShow}>
+                                <i className="fa fa-home"></i>
+                                <span>首页</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <h4>收藏专栏</h4>
+                            <ul>
+                                {
+                                    likes.map((item)=>{
+                                        return (
+                                            <li>
+                                                <Link to={'/theme/'+item.id} >{item.name}</Link>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
                         </li>
                     </ul>
                 </div>

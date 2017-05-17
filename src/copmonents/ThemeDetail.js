@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Card from './uComponents/Card';
 import Loading from './uComponents/Loading'
 
+import Storage from '../storage.js';
+
+
 import axios from 'axios'
 
 require('./style/themeDetail.css')
@@ -15,10 +18,24 @@ export default class ThemeDetail extends Component {
             authors:[],
             items:[],
             height:0,
-            load:true
+            load:true,
+            likes:Storage.get('themes')||[],
+            isLike:true
         }
+        this.toggleLike = this.toggleLike.bind(this)
     }
     componentDidMount() {
+
+        let idArr = this.state.likes.map((e)=>{
+            if(e.id){
+                return e.id
+            }
+        })
+        let bol = idArr.indexOf(this.state.id)>=0
+        this.setState({
+            isLike:bol
+        })
+
         setTimeout(()=> {
             this.setState({
                 height:document.documentElement.clientHeight - this.refs.i.offsetTop
@@ -29,7 +46,6 @@ export default class ThemeDetail extends Component {
 
         axios.get('/api/theme?id='+this.state.id)
         .then((res)=>{
-            console.log(res.data.content)
             let content = res.data.content
             this.setState({
                 title:content.name,
@@ -40,8 +56,26 @@ export default class ThemeDetail extends Component {
             })
         })
     }
+    toggleLike(){
+        this.setState({
+            isLike:!this.state.isLike
+        },()=>{
+            if(!Storage.get('themes')){
+                Storage.set('themes',[])
+            }
+            if(this.state.isLike){
+                Storage.save('themes',{
+                    name:this.state.title,
+                    id:this.state.id
+                })
+            }else{
+                Storage.delet('themes',this.state.id)
+            }
+        })
+    }
     render(){
-        let { title, pic, authors, items, height,load } = this.state;
+        let { title, pic, authors, items, height, load, isLike } = this.state;
+        
         return (
             <div ref="i" className="themeDetail" style={{height:height+'px'}}>
                 {
@@ -51,7 +85,13 @@ export default class ThemeDetail extends Component {
                     <div className="banner" style={{backgroundImage:`url(${pic})`}}>
                         <h3>
                             <span>{title}</span>
+                            <i className="fa fa-heart"
+                            style={{
+                                color:isLike?'#ff4081':'#ccc'
+                            }}
+                            onTouchTap={this.toggleLike}></i>
                         </h3>
+                        
                     </div>
                     <div className="author-box">                       
                         <span>主编:</span>
@@ -69,7 +109,6 @@ export default class ThemeDetail extends Component {
                     <div className="theme-con">
                         {
                             items.map((item)=>{
-                                console.log(item)
                                 return (
                                     <Card key={item.id} info={{
                                         id:item.id,

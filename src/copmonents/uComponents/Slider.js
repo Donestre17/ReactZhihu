@@ -9,31 +9,20 @@ export default class Slider extends Component {
     constructor(props){
         super(props)
         this.state = {
-            loadCount:0
+            loadCount:0,
+
         }
-        this.loaded = this.loaded.bind(this)
     }
     componentDidMount() {
-        
-    }
-    componentDidUpdate(prevProps, prevState) {
+        console.log('slider')
         var slider = this.refs.slider; 
-        var mySwiper;
-        mySwiper = new Swiper (slider, {
-            autoplay: 2000,
-            loop: true,
-            pagination : '.swiper-pagination',
-            paginationType : 'bullets',
-            paginationClickable :true,
-        }) 
-    }
-    componentWillUnmount() {
-        console.log('destory')
-    }
-    loaded(){
-        this.setState({
-            loadCount:++this.state.loadCount
-        })
+        var mySwiper = new Swiper (slider, {
+                        autoplay: 2000,
+                        loop: true,
+                        pagination : '.swiper-pagination',
+                        paginationType : 'bullets',
+                        paginationClickable :true,
+                    }) 
     }
     render(){
         let { topStories } = this.props;
@@ -42,10 +31,10 @@ export default class Slider extends Component {
             <div className="swiper-container" ref="slider">
                 <div className="swiper-wrapper">
                     {
-                        topStories.map((item)=>{
+                        topStories.map((item,index)=>{
                             return (
                                 <div key={item.id} className="swiper-slide">
-                                    <img src={item.image} onLoad={this.loaded}/>
+                                    <img src={item.image}/>
                                     <h3>{item.title}</h3>
                                     <Link to={"/page/"+item.id}></Link>
                                 </div>

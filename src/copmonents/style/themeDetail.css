@@ -34,6 +34,12 @@
   text-align: center;
   font-size: .65rem;
 }
+.themeDetail .banner h3 i {
+  font-size: .7rem;
+  position: absolute;
+  right: .5rem;
+  top: .5rem;
+}
 .themeDetail .author-box {
   width: 100%;
   margin: .2rem 0;

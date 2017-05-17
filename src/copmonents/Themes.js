@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Loading from './uComponents/Loading'
 
 import axios from 'axios'
-
+import Storage from '../storage'
 require('./style/themes.css')
 export default class Themes extends Component {
     constructor(props){
@@ -11,7 +11,7 @@ export default class Themes extends Component {
         this.state = {
             height:0,
             data:[],
-            load:true
+            load:true,
         }
     }
     componentWillMount() {
@@ -45,6 +45,7 @@ export default class Themes extends Component {
     render(){
         let items = this.state.data||[];
         let load = this.state.load;
+        
         return (
             <div
             ref="wrap" style={{height:this.state.height+'px'}} className="theme-box">
@@ -58,8 +59,8 @@ export default class Themes extends Component {
                     {
                         items.map((item)=>{
                             return (
-                                <div key={item.id} className="theme-card">
-                                    <img src={item.thumbnail}/>
+                                <div key={item.id} className="theme-card" >
+                                    <img src={item.thumbnail}/>S
                                     <Link to={'/theme/'+item.id} className="mask">
                                         <span>{item.name}</span>
                                     </Link>
