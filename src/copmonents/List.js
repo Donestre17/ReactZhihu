@@ -61,7 +61,7 @@ export default class List extends Component {
                                 {
                                     likes.map((item)=>{
                                         return (
-                                            <li>
+                                            <li key={Math.random()}>
                                                 <Link to={'/theme/'+item.id} >{item.name}</Link>
                                             </li>
                                         )
